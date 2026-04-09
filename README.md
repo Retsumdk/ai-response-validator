@@ -1,5 +1,8 @@
 # AI Response Validator
 
+[![Build](https://github.com/Retsumdk/ai-response-validator/workflows/CI/badge.svg)](https://github.com/Retsumdk/ai-response-validator/actions)
+
+
 A TypeScript tool to validate and verify AI responses against expected formats and constraints. Ensures AI outputs meet your requirements for format, length, structure, and content quality.
 
 ## Features
