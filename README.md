@@ -1,7 +1,10 @@
 # AI Response Validator
 
 [![Build](https://github.com/Retsumdk/ai-response-validator/workflows/CI/badge.svg)](https://github.com/Retsumdk/ai-response-validator/actions)
-
+[![TypeScript](https://img.shields.io/badge/TypeScript-3178C6.svg)](https://www.typescriptlang.org/)
+[![Node.js](https://img.shields.io/badge/Node.js-20.x-339933.svg)](https://nodejs.org/)
+[![MIT License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+[![Version](https://img.shields.io/badge/version-v1.0.0-orange.svg)](https://github.com/Retsumdk/ai-response-validator/releases/tag/v1.0.0)
 
 A TypeScript tool to validate and verify AI responses against expected formats and constraints. Ensures AI outputs meet your requirements for format, length, structure, and content quality.
 
@@ -38,111 +41,23 @@ import { Validator } from 'ai-response-validator';
 
 const validator = new Validator();
 
-// Validate JSON format
-const result = validator.validate('{"name": "test"}', {
-  format: 'json'
-});
-console.log(result.isValid); // true
-
-// Validate length
-const lengthResult = validator.validate('Hello world', {
-  maxLength: 100,
-  minLength: 5
-});
-console.log(lengthResult.isValid); // true
-```
-
-### Schema Validation
-
-```typescript
-import { Validator, Schema } from 'ai-response-validator';
-
-const userSchema: Schema = {
-  type: 'object',
-  properties: {
-    name: { type: 'string', minLength: 1 },
-    email: { type: 'string', format: 'email' },
-    age: { type: 'number', minimum: 0 }
-  },
-  required: ['name', 'email']
-};
-
-const validator = new Validator();
-const result = validator.validateSchema(
-  '{"name": "John", "email": "john@example.com", "age": 30}',
-  userSchema
-);
-```
-
-### Custom Rules
-
-```typescript
-import { Validator, ValidationRule } from 'ai-response-validator';
-
-const customRule: ValidationRule = {
-  name: 'no-placeholder',
-  validate: (response: string) => {
-    const hasPlaceholder = /\[.*?\]|\{.*?\}/.test(response);
-    return {
-      isValid: !hasPlaceholder,
-      message: hasPlaceholder ? 'Response contains placeholders' : undefined
-    };
+// Validate format
+const result = await validator.validate({
+  content: 'Generated response text',
+  constraints: {
+    format: 'json',
+    maxLength: 1000,
+    schema: jsonSchema
   }
-};
-
-const validator = new Validator({ customRules: [customRule] });
+});
 ```
 
-## API Reference
+## 🔗 Related Repos
 
-### Validator Class
-
-#### `new Validator(options?)`
-Creates a new validator instance.
-
-**Options:**
-- `customRules` - Array of custom validation rules
-- `defaultMaxLength` - Default maximum length (default: 10000)
-- `defaultMinLength` - Default minimum length (default: 0)
-
-#### `validate(response: string, rules: ValidationRules): ValidationResult`
-Validate a response against the given rules.
-
-#### `validateSchema(response: string, schema: Schema): ValidationResult`
-Validate a response against a JSON schema.
-
-#### `validateBatch(responses: string[], rules: ValidationRules): ValidationResult[]`
-Validate multiple responses in parallel.
-
-### Validation Rules
-
-```typescript
-interface ValidationRules {
-  format?: 'json' | 'yaml' | 'markdown' | 'text';
-  schema?: Schema;
-  maxLength?: number;
-  minLength?: number;
-  maxWords?: number;
-  minWords?: number;
-  required?: string[];
-  prohibited?: string[];
-  customRules?: ValidationRule[];
-}
-```
-
-## CLI Usage
-
-```bash
-# Validate a file
-npx ai-response-validator validate --input response.txt --format json
-
-# Validate with schema
-npx ai-response-validator validate --input response.json --schema schema.json
-
-# Batch validate
-npx ai-response-validator batch --input responses/
-```
+- [ai-prompt-optimizer](https://github.com/Retsumdk/ai-prompt-optimizer) — Optimize AI prompts
+- [prompt-version-control](https://github.com/Retsumdk/prompt-version-control) — Version control for prompts
+- [agent-workflow-orchestrator](https://github.com/Retsumdk/agent-workflow-orchestrator) — Orchestrate workflows
 
 ## License
 
-MIT License - see LICENSE file for details.
+MIT License - see [LICENSE](LICENSE) for details.
