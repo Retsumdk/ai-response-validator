@@ -20,7 +20,7 @@ A TypeScript tool to validate and verify AI responses against expected formats a
 ## Installation
 
 ```bash
-npm install ai-response-validator
+npm install github:Retsumdk/ai-response-validator
 ```
 
 Or clone and build:

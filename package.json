@@ -11,7 +11,8 @@
     "build": "tsc",
     "test": "jest",
     "lint": "eslint src --ext .ts",
-    "prepublish": "npm run build"
+    "prepublish": "npm run build",
+    "prepare": "tsc"
   },
   "keywords": [
     "ai",
@@ -43,5 +44,16 @@
   "jest": {
     "preset": "ts-jest",
     "testEnvironment": "node"
-  }
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ]
 }
